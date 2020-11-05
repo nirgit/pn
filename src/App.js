@@ -3,7 +3,12 @@ import './App.css';
 
 const sendNotification = () => {
   navigator.serviceWorker.ready.then(registration => {
-      registration.showNotification("Hello from your service worker")
+      registration.showNotification("Hello from your service worker", {
+        "actions": [
+          { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
+          { "action": "no", "title": "No", "icon": "images/no.png" }
+        ]
+      })
   })
 }
 
