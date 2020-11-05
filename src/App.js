@@ -1,6 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 
+const sendNotification = () => {
+  navigator.serviceWorker.ready.then(registration => {
+      registration.showNotification("Hello from your service worker")
+  })
+}
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +24,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <button onClick={sendNotification}>send notif</button>
     </div>
   );
 }
