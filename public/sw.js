@@ -18,3 +18,8 @@ self.onnotificationclick = function(event) {
     }
   }));
 };
+
+
+function showPushNotification() {
+    self.registration.showNotification("Push Notif arrived!")
+}
