@@ -71,7 +71,25 @@ function subscribeToPushNotifs(swRegistration) {
 function handleSubscription(pushSubscription) {
   // this is the stuff we need to send to the server to use later to send the user a PN
   console.log("Received Push Subscription and sending to server", JSON.stringify(pushSubscription, null, 4))
-  return pushSubscription
+  return fetch('/api/save-push-sub', {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({data: pushSubscription})
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error('Bad status code from server.');
+    }
+
+    return res.json();
+  })
+  .then(function(responseData) {
+    if (!(responseData.status && responseData.status === 'OK')) {
+      throw new Error('Bad response from server.');
+    }
+  })
 }
 
 registerServiceWorker()
