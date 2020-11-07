@@ -20,16 +20,17 @@ self.onnotificationclick = function(event) {
 };
 
 self.addEventListener('push', function(event) {
-  showPushNotification()
   if (event.data) {
     console.log('Push event!! ', event.data.text())
   } else {
     console.log('Push event but no data')
   }
+  const promiseChain = showPushNotification()
+  event.waitUntil(promiseChain)
 })
 
 function showPushNotification() {
-    self.registration.showNotification("You received a Push Notif :)", {
+    return self.registration.showNotification("You received a Push Notif :)", {
       body: "some PN textual body..."
     })
 }
