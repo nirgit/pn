@@ -19,7 +19,17 @@ self.onnotificationclick = function(event) {
   }));
 };
 
+self.addEventListener('push', function(event) {
+  showPushNotification()
+  if (event.data) {
+    console.log('Push event!! ', event.data.text())
+  } else {
+    console.log('Push event but no data')
+  }
+})
 
 function showPushNotification() {
-    self.registration.showNotification("Push Notif arrived!")
+    self.registration.showNotification("You received a Push Notif :)", {
+      body: "some PN textual body..."
+    })
 }

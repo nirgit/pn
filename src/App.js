@@ -1,14 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
 
-const sendNotification = () => {
-  navigator.serviceWorker.ready.then(registration => {
-      registration.showNotification("Hello from your service worker", {
-        "actions": [
-          { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
-          { "action": "no", "title": "No", "icon": "images/no.png" }
-        ]
-      })
+const triggerPushNotif = () => {
+  fetch('/api/trigger-push', {method: 'GET'})
+  .then(res => {
+    if (!res.ok) {
+      throw new Error('Bad status code from server.');
+    }
+
+    return res.json();
+  })
+  .then(function(responseData) {
+    if (!(responseData.status && responseData.status === 'OK')) {
+      throw new Error('Bad response from server.');
+    }
   })
 }
 
@@ -29,7 +34,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <button onClick={sendNotification}>send notif</button>
+      <button onClick={triggerPushNotif}>send notif</button>
     </div>
   );
 }
