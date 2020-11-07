@@ -3,23 +3,23 @@ const VAPID_PUBLIC_KEY = window.vapid_key //'BNjlC0ub2WVA5hGekdsX7bRJGQ_LpoVAujo
 function registerServiceWorker() {
     return new Promise((res, rej) => {
         if (!'serviceWorker' in navigator) {
-        console.warn("No support for service worker :(")
-        rej("No support for service worker :(")
-        return;
+            console.warn("No support for service worker :(")
+            rej("No support for service worker :(")
+            return;
         }
         // ask for permissions from the user
         Notification.requestPermission().then(result => {
-        if (result !== 'granted') {
-            rej("no permissions granted")
-            return; // we didn't get any permissions :(
-        }
-        navigator.serviceWorker.register('./sw.js').then(registration => {
-            console.log("Registered SW successfully")
-            res(registration)
-        }, error => {
-            console.error("Failed registering SW", error)
-            rej(error)
-        })
+            if (result !== 'granted') {
+                rej("no permissions granted")
+                return; // we didn't get any permissions :(
+            }
+            navigator.serviceWorker.register('./sw.js').then(registration => {
+                console.log("Registered SW successfully")
+                res(registration)
+            }, error => {
+                console.error("Failed registering SW", error)
+                rej(error)
+            })
         })
     })
 }
