@@ -1,3 +1,6 @@
+# Push Notifications (Web Push protocol)
+see documentation: https://developers.google.com/web/fundamentals/push-notifications
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
